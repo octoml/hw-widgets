@@ -11,5 +11,8 @@ Install Verilator (4.100 or above)
 
 ## Build
 
-Build scalar add hardware by running `make`
+1. Build Verilator hardware library by running `make`
+2. Enable Verilator backend by setting `USE_VERILATOR_HW ON` in TVM cmake configuration file (`config.cmake`)
+3. Build and install TVM
+4. Run test `python3 scalar_add/tests/test_ops.py`
 
