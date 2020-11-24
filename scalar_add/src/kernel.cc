@@ -26,14 +26,14 @@ namespace tvm {
 namespace runtime {
 namespace contrib {
 
-extern "C" void verilator_add(VerilatorHandle handle, int *a, int *b, int *y, int h, int w) {
-  for (int64_t i = 0; i < h; ++i) {
-    for (int64_t j = 0; j < w; ++j) {
-      int64_t k = i * w + j;
-      VerilatorWrite(handle, 0, 0, a[k]);
-      VerilatorWrite(handle, 1, 0, b[k]);
+extern "C" void verilator_add(VerilatorHandle handle, int *data, int *weight, int *out, int p_h_, int p_w_) {
+  for (int64_t i = 0; i < p_h_; ++i) {
+    for (int64_t j = 0; j < p_w_; ++j) {
+      int64_t k = i * p_w_ + j;
+      VerilatorWrite(handle, 0, 0, data[k]);
+      VerilatorWrite(handle, 1, 0, weight[k]);
       VerilatorRun(handle, 1);
-      y[k] = VerilatorRead(handle, 2, 0);
+      out[k] = VerilatorRead(handle, 2, 0);
     }
   }
 }
