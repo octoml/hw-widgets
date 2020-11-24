@@ -34,8 +34,4 @@ module scalar_add(input clock, input reset);
         end
     end
 
-    initial begin
-        $display("Running verilog scalar add...");
-    end
-
 endmodule
