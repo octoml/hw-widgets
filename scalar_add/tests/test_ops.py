@@ -26,8 +26,21 @@ from tvm.relay import transform
 
 
 def _register_external_op_helper(op_name, supported=True):
+    """The helper function to indicate that a given operator can be supported by Verilator.
+
+    Paramters
+    ---------
+    op_name : Str
+        The name of operator that will be registered.
+
+    Returns
+    -------
+    f : callable
+        A function that returns if the operator is supported by DNNL.
+    """
+
     @tvm.ir.register_op_attr(op_name, "target.verilator")
-    def _func_wrapper(attrs, args):
+    def _func_wrapper(expr):
         return supported
 
     return _func_wrapper
